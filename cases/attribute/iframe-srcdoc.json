@@ -1,0 +1,23 @@
+{
+  "title": "iFrame srcdoc XSS",
+  "difficulty": "medium",
+  "category": "attribute",
+  "risk": "high",
+  "description": "User input is reflected inside an iframe srcdoc attribute. The srcdoc attribute renders arbitrary HTML provided by the attacker, leading to full script execution. Since sandbox is not used, JavaScript inside the iframe can run with full privileges.",
+  "objectives": [
+    "Understand how the srcdoc attribute renders raw HTML.",
+    "Identify that srcdoc overrides normal iframe content.",
+    "Use attribute escaping to break out and inject JavaScript.",
+    "Achieve XSS by injecting active HTML or scripts inside srcdoc."
+  ],
+"hints": [
+  "Your input ends up inside the iframe's srcdoc attribute — think about how you can influence the HTML that will be rendered inside it.",
+  "Since your input is placed inside an attribute value, consider how you could exit that attribute.",
+  "After breaking out of the attribute, you will be able to inject normal HTML inside the iframe.",
+  "What kind of HTML elements can execute JavaScript once you're outside the attribute?",
+  "Final Hint (Solution): Some valid payloads include:\n  \"><script>alert(1)</script>\",\n  \"><img src=x onerror=alert(1)>\",\n  \"><svg/onload=alert(1)>"
+],
+  "status": "active",
+  "type": "html",
+  "body": "<article>\n  <iframe id=\"f\" srcdoc=\"\"></iframe>\n  <script>\n    const q = new URLSearchParams(location.search).get('q') || '';\n    document.getElementById('f').setAttribute('srcdoc', q);\n  </script>\n</article>"
+}

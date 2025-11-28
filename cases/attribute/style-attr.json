@@ -1,0 +1,23 @@
+
+{
+  "title": "Style Attribute Value XSS",
+  "difficulty": "high",
+  "category": "attribute",
+  "risk": "high",
+  "description": "User input is reflected inside a CSS style attribute. CSS cannot execute JavaScript directly, but escaping the attribute value allows the attacker to break out of the style context and inject additional HTML attributes such as event handlers.",
+  "objectives": [
+    "Understand the difference between CSS context and HTML attribute context.",
+    "Break out of a style attribute using quote termination.",
+    "Inject JavaScript through a newly added HTML event handler."
+  ],
+  "hints": [
+    "CSS by itself cannot execute JavaScript.",
+    "But the style attribute still belongs to HTML and has quotes that can be escaped.",
+    "If you break out of the style value, you can add a new HTML attribute.",
+    "Final Hint (Solution): \" onload=alert(1)"
+  ],
+  "status": "active",
+  "type": "html",
+ "body": "<script>alert(1)</script>"
+
+}

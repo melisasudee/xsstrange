@@ -1,0 +1,22 @@
+{
+  "title": "NoScript Tag XSS",
+  "difficulty": "medium",
+  "category": "attribute",
+  "risk": "medium",
+  "description": "User input is reflected inside a <noscript> tag. When JavaScript is enabled, the content of <noscript> behaves like CDATA, meaning no HTML or scripts inside it are parsed. To trigger XSS, the attacker must close the <noscript> tag and switch back into normal HTML parsing context before injecting active HTML/JavaScript.",
+  "objectives": [
+    "Understand how <noscript> behaves when JavaScript is enabled.",
+    "Recognize why CDATA-like content inside <noscript> is not parsed.",
+    "Escape the noscript element to re-enter normal HTML parsing and inject JavaScript."
+  ],
+  "hints": [
+    "Content inside <noscript> is treated as plain text and not parsed.",
+    "Consider what happens if the noscript tag is closed early.",
+    "Once outside the noscript tag, normal HTML parsing resumes.",
+    "Final Hint (Solution): </noscript><script>alert(1)</script>"
+  ],
+  "status": "active",
+  "type": "html",
+  "body": "<article>\n<script>\nconst q = new URLSearchParams(location.search).get('q') || '';\ndocument.write('<noscript>' + q + '</noscript>');\n</script>\n</article>"
+
+}

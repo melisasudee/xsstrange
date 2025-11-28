@@ -39,7 +39,39 @@
         "Query parameters",
         "Form fields"
       ],
-      "resources": []
+      "resources": [],
+      "test_cases": [
+        "php-search-form"
+      ]
+    }
+  },
+  {
+    "category": "attribute",
+    "tag": "Medium",
+    "title": "Attribute Context XSS",
+    "description": "HTML attribute içerisinde oluşan XSS zafiyetleri.",
+    "status": "Active",
+    "details": {
+      "long_description": "Attribute context XSS, kullanıcı girdisinin HTML attribute içine kontrolsüz yerleştirilmesiyle oluşur. Tırnak kırarak event handler veya script eklemek mümkündür.",
+      "impact": [
+        "Keylogger",
+        "Session Hijacking",
+        "CSRF Bypass"
+      ],
+      "vectors": [
+        "style=\"...\"",
+        "onmouseover=\"...\"",
+        "srcdoc=\"...\"",
+        "textarea attribute",
+        "noscript escape"
+      ],
+      "test_cases": [
+        "textarea",
+        "textarea-attr",
+        "noscript",
+        "iframe-srcdoc",
+        "style-attr"
+      ]
     }
   }
 ]

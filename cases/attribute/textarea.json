@@ -1,0 +1,21 @@
+{
+  "title": "Textarea CDATA XSS",
+  "difficulty": "medium",
+  "category": "attribute",
+  "risk": "medium",
+  "description": "User input appears inside a <textarea>. HTML inside a textarea is not rendered, so escaping the textarea is required to execute JavaScript.",
+  "objectives": [
+    "Understand CDATA-like behavior of textarea.",
+    "Learn how to escape closing tags.",
+    "Inject active HTML after breaking out."
+  ],
+  "hints": [
+    "Content inside a textarea is treated as plain text.",
+    "HTML does not execute until you break outside the textarea.",
+    "Try closing the textarea tag and injecting HTML afterwards.",
+    "Final Hint (Solution): </textarea><script>alert(1)</script>"
+  ],
+  "status": "active",
+  "type": "html",
+  "body": "<article>\n<textarea id=\"t\"></textarea>\n<script>\nconst q = new URLSearchParams(location.search).get('q') || '';\ndocument.getElementById('t').textContent = q;\n</script>\n</article>"
+}

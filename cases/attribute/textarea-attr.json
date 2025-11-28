@@ -1,0 +1,22 @@
+{
+  "title": "Textarea Attribute Value XSS",
+  "difficulty": "medium",
+  "category": "attribute",
+  "risk": "high",
+  "description": "User input is inserted into a custom textarea attribute. By breaking out of the attribute quotes, an attacker can inject event handlers like onfocus to execute JavaScript.",
+  "objectives": [
+    "Understand HTML attribute injection.",
+    "Break out of a quoted attribute.",
+    "Inject a new event handler such as onfocus.",
+    "Trigger JavaScript execution through attribute injection."
+  ],
+  "hints": [
+    "User input is placed inside a quoted attribute.",
+    "If you break the quote, you can add your own attributes.",
+    "Textarea does not auto-trigger focus naturally — consider forcing focus.",
+    "Final Hint (Solution): \" onfocus=alert(1)"
+  ],
+  "status": "active",
+  "type": "html",
+  "body": "<article>\n<script>\nconst q = new URLSearchParams(location.search).get('q') || '';\ndocument.write('<textarea id=\"txt\" style=\"width:300px;height:150px;border:2px solid red\" data-info=\"' + q + '\">Textarea XSS</textarea>');\n</script>\n<script>\n// Automatically focus the textarea to trigger injected onfocus\nsetTimeout(() => {\n  const el = document.getElementById('txt');\n  if (el) el.focus();\n}, 300);\n</script>\n</article>"
+}
